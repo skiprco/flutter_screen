@@ -19,8 +19,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   initPlatformState() async {
-    bool keptOn = await Screen.isKeptOn;
-    double brightness = await Screen.brightness;
+    bool keptOn = await Screen.isKeptOn ?? false;
+    double brightness = await Screen.brightness ?? 0;
     setState((){
       _isKeptOn = keptOn;
       _brightness = brightness;
@@ -39,9 +39,9 @@ class _MyAppState extends State<MyApp> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       new Text("Screen is kept on ? "),
-                      new Checkbox(value: _isKeptOn, onChanged: (bool b){
-                        Screen.keepOn(b);
-                        setState((){_isKeptOn = b; });
+                      new Checkbox(value: _isKeptOn, onChanged: (bool? b){
+                        Screen.keepOn(b ?? false);
+                        setState((){_isKeptOn = b ?? false; });
                       })
                     ]
                   ),
